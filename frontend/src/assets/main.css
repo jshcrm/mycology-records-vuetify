@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+#app {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0rem 2rem;
+
+  font-weight: normal;
+}
+
+a,
+.green {
+  text-decoration: none;
+  color: hsla(160, 100%, 37%, 1);
+  transition: 0.4s;
+}
+
+@media (hover: hover) {
+  a:hover {
+    background-color: hsla(160, 100%, 37%, 0.2);
+  }
+}
+
+@media (min-width: 1024px) {
+  body {
+    display: flex;
+    place-items: center;
+  }
+}
+
+h1 {
+  font-size: 24px;
+  font-weight: 600;
+  /* line-height: 23.44px; */
+}
+
+h2 {
+  font-size: 20px;
+  /* line-height: 23.44px; */
+}
+
+.text-sm {
+  font-size: 14px;
+  /* line-height: 16.41; */
+}
+
+.caption {
+  font-size: 12px;
+  font-weight: 400;
+  /* line-height: 14.06; */
+}
+
+.font-bold {
+  font-weight: 600;
+}
