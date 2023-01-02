@@ -2,7 +2,6 @@ from typing import Dict
 
 from sqlalchemy.ext.declarative import as_declarative, declared_attr
 
-
 class_registry: Dict = {}
 
 

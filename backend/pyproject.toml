@@ -11,6 +11,9 @@ uvicorn = "^0.20.0"
 SQLAlchemy = "^1.4.45"
 asyncpg = "^0.27.0"
 alembic = "^1.9.1"
+fastapi-users = "^10.2.1"
+fastapi-users-db-sqlalchemy = "^4.0.3"
+procrastinate = "^0.26.0"
 
 [tool.poetry.dev-dependencies]
 black = "^22.12.0"
@@ -21,3 +24,10 @@ isort = "^5.11.4"
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.isort]
+profile = "black"
+
+
+[tool.mypy]
+ignore_missing_imports = true

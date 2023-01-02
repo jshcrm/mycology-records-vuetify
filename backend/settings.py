@@ -4,18 +4,20 @@ from pydantic import BaseSettings
 
 
 class Settings(BaseSettings):
-    DEBUG: bool = environ.get("DEBUG", "False") == True
+    DEBUG: bool = environ.get("DEBUG", "False") is True
 
     SECRET: str = environ.get("SECRET", "")
 
-    DATABASE_HOST: str = environ.get("DATABASE_HOST", "")
-    DATABASE_PORT: str = environ.get("DATABASE_PORT", "")
-    DATABASE_DB: str = environ.get("DATABASE_DB", "")
-    DATABASE_USER: str = environ.get("DATABASE_USER", "")
-    DATABASE_PASSWORD: str = environ.get("DATABASE_PASSWORD", "")
+    IS_TASK_QUEUE: bool = environ.get("IS_TASK_QUEUE", "False") is True
 
-    MEDIA_DIR: str = f"/media"
+    POSTGRES_HOST: str = environ.get("POSTGRES_HOST", "")
+    POSTGRES_PORT: str = environ.get("POSTGRES_PORT", "")
+    POSTGRES_DB: str = environ.get("POSTGRES_DB", "")
+    POSTGRES_USER: str = environ.get("POSTGRES_USER", "")
+    POSTGRES_PASSWORD: str = environ.get("POSTGRES_PASSWORD", "")
+
+    MEDIA_DIR: str = environ.get("POSTGRES_PASSWORD", "/media")
 
     @property
     def DATABASE_URL(self):
-        return f"postgresql+asyncpg://{self.DATABASE_USER}@{self.DATABASE_HOST}:{self.DATABASE_PORT}/{self.DATABASE_DB}"
+        return f"postgresql+asyncpg://{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}@{self.POSTGRES_HOST}:{self.POSTGRES_PORT}/{self.POSTGRES_DB}"  # noqa: E501

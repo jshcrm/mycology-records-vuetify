@@ -1,33 +1,24 @@
 from typing import AsyncGenerator
 
 import sqlalchemy
-
+from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 
-from .base import Base
 from ..settings import Settings
+from .base import Base
 
-
-database_url =Settings().DATABASE_URL
+database_url = Settings().DATABASE_URL
 
 metadata = sqlalchemy.MetaData()
 
 
 engine = create_async_engine(
-        database_url,
-        pool_pre_ping=True,
-        pool_size=75,
-        max_overflow=25,
-        future=True
-    )
+    database_url, pool_pre_ping=True, pool_size=75, max_overflow=25, future=True
+)
 
 
 async_session = sessionmaker(
-    autoflush=True,
-    bind=engine,
-    class_=AsyncSession,
-    future=True
+    autoflush=True, bind=engine, class_=AsyncSession, future=True
 )
 
 

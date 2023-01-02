@@ -1,0 +1,76 @@
+version: '3'
+
+services:
+  backend:
+    build: ./backend
+    container_name: backend
+    restart: always
+    networks:
+      default:
+      proxy:
+    ports:
+      - 8080:80
+    env_file:
+      - ./backend/.env
+    volumes:
+      - ./backend:/backend
+    depends_on:
+      - postgres
+
+  queue:
+    build: ./backend
+    container_name: queue
+    restart: always
+    networks:
+      default:
+      proxy:
+    ports:
+      - 8081:80
+    env_file:
+      - ./backend/.env
+    environment:
+      - IS_TASK_QUEUE=True
+    volumes:
+      - ./backend:/backend
+    depends_on:
+      - backend
+      - postgres
+
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    restart: always
+    networks:
+      default:
+      proxy:
+    ports:
+      - 8082:5173
+    env_file:
+      - ./frontend/.env
+    volumes:
+      - ./frontend:/app
+    depends_on:
+      - backend
+      - postgres
+
+  postgres:
+    image: postgres:13
+    container_name: postgres
+    # command: -c config_file=/usr/local/etc/postgres/postgres.conf
+    restart: always
+    networks:
+      proxy:
+    expose:
+      - "5432"
+    environment:
+      - POSTGRES_USER=jshcrm
+      - POSTGRES_PASSWORD=jshcrm
+      - POSTGRES_DB=jshcrm
+    volumes:
+      - ./postgres/postgres.conf:/usr/local/etc/postgres/postgres.conf
+      - ./postgres/pgdata:/var/lib/postgresql/data
+
+networks:
+  proxy:
+  default:
+    driver: bridge
