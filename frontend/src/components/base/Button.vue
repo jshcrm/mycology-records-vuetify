@@ -28,25 +28,24 @@ export default {
   },
   computed: {
     getButtonTypeClasses() {
-      const buttonTypes = {
+      const buttonTypes: { [buttonType: string]: Array<string> } = {
         primary: [
           "bg-primary-orange",
-          "text-nofie-white",
+          "bg-primary-white",
           "hover:bg-dark-orange",
         ],
         secondary: [
           "bg-light-green",
           "text-dark-green",
           "hover:bg-dark-green",
-          "hover:text-nofie-white",
+          "hover:bg-primary-white",
         ],
         tertiary: ["bg-background-gray", "hover:bg-div-gray"],
       };
-      console.log(this.buttonType);
       return buttonTypes[this.buttonType];
     },
     getSize() {
-      const sizes = {
+      const sizes: { [size: string]: string } = {
         sm: "60px",
         md: "100px",
         lg: "140px",

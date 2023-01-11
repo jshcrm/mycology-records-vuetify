@@ -59,7 +59,8 @@ export default {
   },
   methods: {
     emitChange(e: Event) {
-      this.$emit("update:modelValue", e.target?.value);
+      const target = e.target as HTMLInputElement
+      this.$emit("update:modelValue", target?.value);
     }
   },
 };
