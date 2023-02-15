@@ -1,14 +1,11 @@
 <template>
   <button
     type="button"
-    class="group relative h-12 w-48 overflow-hidden rounded-lg bg-white text-lg shadow"
+    class="border rounded-md px-4 py-2 m-2 transition duration-500 ease select-none focus:outline-none focus:shadow-outline"
     :class="getButtonTypeClasses"
     :style="{ width: getSize }"
   >
-    <div
-      class="absolute inset-0 w-3 bg-amber-400 transition-all duration-[250ms] ease-out group-hover:w-full"
-    ></div>
-    <span class="relative text-black group-hover:text-white"><slot /></span>
+    <slot />
   </button>
 </template>
 
@@ -30,17 +27,47 @@ export default {
     getButtonTypeClasses() {
       const buttonTypes: { [buttonType: string]: Array<string> } = {
         primary: [
-          "bg-primary-orange",
-          "bg-primary-white",
-          "hover:bg-dark-orange",
+          "border-indigo-500",
+          "bg-indigo-500",
+          "text-white",
+          "hover:bg-indigo-600",
         ],
-        secondary: [
-          "bg-light-green",
-          "text-dark-green",
-          "hover:bg-dark-green",
+        success: [
+          "border-green-500",
+          "bg-green-500",
+          "text-white",
           "hover:bg-primary-white",
         ],
-        tertiary: ["bg-background-gray", "hover:bg-div-gray"],
+        error: [
+          "border-red-500",
+          "bg-red-500",
+          "text-white",
+          "hover:bg-red-600",
+        ],
+        warning: [
+          "border-yellow-500",
+          "bg-yellow-500",
+          "text-white",
+          "hover:bg-yellow-600",
+        ],
+        info: [
+          "border-teal-500",
+          "bg-teal-500",
+          "text-white",
+          "hover:bg-teal-600",
+        ],
+        dark: [
+          "border-gray-700",
+          "bg-gray-700",
+          "text-white",
+          "hover:bg-gray-800",
+        ],
+        light: [
+          "border-gray-200",
+          "bg-gray-200",
+          "text-gray-700",
+          "hover:bg-gray-300",
+        ],
       };
       return buttonTypes[this.buttonType];
     },

@@ -1,6 +1,7 @@
 from ..schemas.users import UserCreate, UserDB, UserUpdate
 from .dependencies import fastapi_users
 from .security import jwt_backend
+from backend.routes import grows, media, strains
 
 
 def add_routes_to_app(app):
@@ -24,3 +25,8 @@ def add_routes_to_app(app):
         prefix="/users",
         tags=["users"],
     )
+
+    # app.include_router(spawn.router)
+    app.include_router(strains.router)
+    app.include_router(grows.router)
+    app.include_router(media.router)

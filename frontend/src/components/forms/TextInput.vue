@@ -2,10 +2,14 @@
   <div class="flex flex-col inline-block">
     <div class="relative">
       <slot name="icon"></slot>
-      <div class="mb-[3px] inline-block">
+      <div class="mb-[3px] inline-block w-full ">
+        <label :for="label" class="form-label inline-block mb-2 text-gray-700"
+          >{{ label }}</label
+        >
+
         <input
           type="text"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           :class="{
             'ring-error-red': !isValid,
             'pl-[51px]': hasIcon,
@@ -40,7 +44,7 @@ export default {
       default: "",
     },
     modelValue: {
-      type: String,
+      type: [Number, String],
       default: "",
     },
     disabled: {

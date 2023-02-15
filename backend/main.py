@@ -44,4 +44,6 @@ async def shutdown() -> None:
     await procrastinate_app.close_async()
 
 
+from .models.imports import *
+
 add_routes_to_app(app)

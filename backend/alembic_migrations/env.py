@@ -6,6 +6,7 @@ from sqlalchemy import engine_from_config, pool
 from sqlalchemy.engine import Connection
 from sqlalchemy.ext.asyncio import AsyncEngine
 
+from backend.models.base import Base
 from backend.models.imports import *
 from backend.settings import Settings
 
@@ -24,13 +25,28 @@ if config.config_file_name is not None:
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-target_metadata = None
+target_metadata = Base.metadata
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
 # my_important_option = config.get_main_option("my_important_option")
 # ... etc.
 
+# Ideally this is stored in my actual database, but for now, let's assume we have a list...
+IGNORE_TABLES = ["procrastinate_periodic_defers", "procrastinate_events", "procrastinate_jobs"]
+
+def include_object(object, name, type_, reflected, compare_to):
+    """
+    Should you include this table or not?
+    """
+
+    if type_ == 'table' and (name in IGNORE_TABLES or object.info.get("skip_autogenerate", False)):
+        return False
+
+    elif type_ == "column" and object.info.get("skip_autogenerate", False):
+        return False
+
+    return True
 
 def run_migrations_offline() -> None:
     """Run migrations in 'offline' mode.
@@ -50,6 +66,7 @@ def run_migrations_offline() -> None:
         literal_binds=True,
         dialect_opts={"paramstyle": "named"},
         user_module_prefix="sa.",
+        include_object=include_object
     )
 
     with context.begin_transaction():
@@ -58,7 +75,7 @@ def run_migrations_offline() -> None:
 
 def do_run_migrations(connection: Connection) -> None:
     context.configure(
-        connection=connection, target_metadata=target_metadata, user_module_prefix="sa."
+        connection=connection, target_metadata=target_metadata, user_module_prefix="sa.", include_object=include_object
     )
 
     with context.begin_transaction():

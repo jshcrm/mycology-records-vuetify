@@ -14,6 +14,7 @@ services:
       - ./backend/.env
     volumes:
       - ./backend:/backend
+    # command: procrastinate --app=backend.services.queue.procrastinate_app schema --apply
     depends_on:
       - postgres
 
