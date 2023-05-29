@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import Button from "@/components/base/Button.vue";
 import DateInput from "../forms/DateInput.vue";
 import TextInput from "@/components/forms/TextInput.vue";
 import type { CreateMedia } from "@/interfaces/Media";
@@ -9,17 +8,13 @@ import MediaService from "@/networking/media.service.js";
 <template>
   <div class="flex mb-4 w-full">
     <div class="w-[50%]">
-      <TextInput
-        class="pr-2"
-        label="Name"
-        v-model="createForm.name"
-      ></TextInput>
+      <v-text-field label="Name" v-model="createForm.name"></v-text-field>
     </div>
     <div class="w-[50%]">
-      <TextInput
+      <v-text-field
         label="Inoculation Type"
         v-model="createForm.inoculation_type"
-      ></TextInput>
+      ></v-text-field>
     </div>
   </div>
 
@@ -40,11 +35,11 @@ import MediaService from "@/networking/media.service.js";
   </div>
 
   <div class="mb-4">
-    <TextInput label="Notes" v-model="createForm.notes"></TextInput>
+    <v-textarea label="Notes" v-model="createForm.notes"></v-textarea>
   </div>
 
   <div>
-    <Button @click="submitForm">Submit</Button>
+    <v-btn color="secondary" @click="submitForm">Submit</v-btn>
   </div>
 </template>
 

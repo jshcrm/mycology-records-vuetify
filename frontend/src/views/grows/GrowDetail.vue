@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import dayjs from "dayjs";
-import Button from "@/components/base/Button.vue";
 import Modal from "@/components/base/Modal.vue";
 import GrowCard from "@/components/grows/GrowCard.vue";
 import GrowForm from "@/components/grows/GrowForm.vue";
@@ -14,13 +13,13 @@ import { ref } from "vue";
 <template>
   <div v-if="grow">
     <GrowCard :grow="grow"></GrowCard>
-    <apexchart
+    <!-- <apexchart
       v-if="chart.render"
       width="500"
       type="rangeBar"
       :options="options"
       :series="medias"
-    ></apexchart>
+    ></apexchart> -->
   </div>
 </template>
 
@@ -48,8 +47,8 @@ export default {
           }
         },
         xaxis: {
-          type: 'datetime'
-        }
+          type: "datetime",
+        },
       },
     };
     return data;

@@ -1,29 +1,32 @@
 <script setup lang="ts">
 import type { Media } from "@/interfaces/Media.js";
+import MediaService from "@/networking/media.service";
 import dayjs from "dayjs";
 import type { PropType } from "vue";
 </script>
 
 <template>
-  <div class="flex">
+  <div class="d-flex">
     <div class="block p-6 rounded-lg shadow-lg bg-white max-w-sm">
-      <h5 class="text-gray-900 text-xl leading-tight font-medium mb-2">
-        {{ media.name }}
-      </h5>
+      <v-card>
+        <v-card-title>
+          {{ media.name }}
+        </v-card-title>
 
-      <p class="text-gray-700 text-base mb-4">
-        <p><span class="font-bold">Method:</span> {{ media.inoculation_type }}</p>
-        <p><span class="font-bold">Inoculated:</span> {{ $filters.dateFilter(media.inoculation_date) }}</p>
-        <p v-if="media.full_colonization_date"><span class="font-bold">Colonized:</span> {{ fullColonizationDate }}</p>
-        <p><span class="font-bold">Notes:</span> {{ media.notes }}</p>
-      </p>
+        <v-card-text>
+          <p class="text-gray-700 text-base mb-4">
+            <p><span class="font-weight-bold">Method:</span> {{ media.inoculation_type }}</p>
+            <p><span class="font-weight-bold">Inoculated:</span> {{ $filters.dateFilter(media.inoculation_date) }}</p>
+            <p v-if="media.full_colonization_date"><span class="font-weight-bold">Colonized:</span> {{ fullColonizationDate }}</p>
+            <p v-if="media.notes"><span class="font-weight-bold">Notes:</span> {{ media.notes }}</p>
+          </p>
+        </v-card-text>
 
-      <button
-        type="button"
-        class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
-      >
-        Button
-      </button>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn @click=" deleteMedia"><v-icon class="text-red" icon="mdi-trash-can"></v-icon></v-btn>
+        </v-card-actions>
+      </v-card>
     </div>
   </div>
   <div></div>
@@ -42,7 +45,11 @@ export default {
     return data;
   },
   mounted() {},
-  methods: {},
+  methods: {
+    deleteMedia() {
+      MediaService.delete(String(this.media.id))
+    }
+  },
   computed: {
     inoculationDate(): String{
       return dayjs(this.media.inoculation_date).format("MM/DD/YYYY");

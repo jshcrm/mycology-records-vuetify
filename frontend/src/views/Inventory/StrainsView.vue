@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import Button from "@/components/base/Button.vue";
 import Modal from "@/components/base/Modal.vue";
 import StrainForm from "@/components/strains/StrainForm.vue";
 import type { Strain } from "@/interfaces/Strain.js";
@@ -9,7 +8,7 @@ import StrainService from "@/networking/strain.service.js";
 
 <template>
   <div class="w-full text-right">
-    <Button size="xl " @click="showCreateModal = true">Create Strain</Button>
+    <v-btn color="secondary" @click="showCreateModal = true">Create Strain</v-btn>
   </div>
 
   <div class="flex">

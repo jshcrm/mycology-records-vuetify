@@ -1,6 +1,7 @@
 from typing import Any, List
 
 from fastapi import APIRouter, Depends, HTTPException
+from fastapi.responses import JSONResponse
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from backend.models.database import get_async_session
@@ -20,7 +21,7 @@ async def read(
     limit: int = 100,
     # current_user: User = Depends(current_active_user),
 ) -> Any:
-    return await Media.filter(session)
+    return await Media.objects().filter(session)
 
 
 @router.post("/", response_model=MediaDB)
@@ -30,3 +31,15 @@ async def create(
     # current_user: User = Depends(current_active_user),
 ) -> Any:
     return await Media.objects().create(instance).save(session)
+
+
+@router.delete("/{instance_id}")
+async def delete(
+    instance_id: int,
+    session: AsyncSession = Depends(get_async_session),
+    skip: int = 0,
+    limit: int = 100,
+    # current_user: User = Depends(current_active_user),
+) -> Any:
+    await Media.objects().filter(id=instance_id).delete(session)
+    return JSONResponse(status_code=204, content={"status": "success"})

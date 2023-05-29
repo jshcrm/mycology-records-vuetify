@@ -1,20 +1,16 @@
 <script setup lang="ts">
 import { RouterView } from "vue-router";
 import NavBar from "./components/base/NavBar.vue";
-import SideBar from "./components/base/SideBar.vue";
 </script>
 
 <template>
-  <div class="w-[290px]">
-    <SideBar></SideBar>
-  </div>
+  <v-app>
+    <v-main>
+      <NavBar></NavBar>
 
-  <div class="ml-[290px]">
-    <NavBar></NavBar>
-    <div class="mt-[20px]">
       <RouterView />
-    </div>
-  </div>
+    </v-main>
+  </v-app>
 </template>
 
 <style scoped></style>

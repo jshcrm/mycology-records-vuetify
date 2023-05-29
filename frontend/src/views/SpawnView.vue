@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import Button from "@/components/base/Button.vue";
 import Modal from "@/components/base/Modal.vue";
 import SpawnCard from "@/components/spawn/SpawnCard.vue";
 import SpawnForm from "@/components/spawn/SpawnForm.vue";
@@ -9,8 +8,8 @@ import SpawnService from "@/networking/spawn.service.js";
 
 <template>
   <div class="w-full text-right">
-    <Button size="xl " @click="showCreateSpawnModal = true"
-      >Create Spawn</Button
+    <v-btn color="secondary" @click="showCreateSpawnModal = true"
+      >Create Spawn</v-btn
     >
   </div>
 

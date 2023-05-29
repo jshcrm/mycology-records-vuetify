@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import Button from "@/components/base/Button.vue";
-import TextInput from "@/components/forms/TextInput.vue";
 import GrowService from "@/networking/grow.service.js";
 import StrainService from "@/networking/strain.service";
 import type { CreateGrow } from "@/interfaces/Grow";
@@ -13,20 +11,22 @@ import type { Strain } from "@/interfaces/Strain";
       <div>
         <label for="strain">Strain</label>
       </div>
-      <select v-model="createForm.strain_id" name="strain" id="strain">
-        <option v-for="strain in strains" :key="strain.id" :value="strain.id">
-          {{ strain.name }}
-        </option>
-      </select>
+      <div v-if="selectStrains.length > 0">
+        <v-select
+          :items="selectStrains"
+          v-model="createForm.strain_id"
+          label="Strain"
+        ></v-select>
+      </div>
     </div>
   </div>
 
   <div class="mb-4">
-    <TextInput label="Notes" v-model="createForm.notes"></TextInput>
+    <v-text-field label="Notes" v-model="createForm.notes"></v-text-field>
   </div>
 
   <div>
-    <Button @click="submitForm">Submit</Button>
+    <v-btn color="primary" @click="submitForm">Submit</v-btn>
   </div>
 </template>
 
@@ -34,11 +34,12 @@ import type { Strain } from "@/interfaces/Strain";
 export default {
   emits: ["growCreated"],
   data() {
-    let createForm: CreateGrow = { strain_id: 0, notes: "" };
+    let createForm: CreateGrow = { strain_id: "", notes: "" };
 
     const data = {
       createForm: createForm,
       strains: Array<Strain>(),
+      selectStrains: Array<Record<string, string>>(),
     };
     return data;
   },
@@ -55,6 +56,14 @@ export default {
       StrainService.list().then((response) => {
         this.strains = response.data;
         console.log(this.strains);
+        for (let strain of this.strains) {
+          this.selectStrains.push({
+            title: strain.name,
+            value: String(strain.id),
+          });
+        }
+
+        console.log(this.selectStrains);
       });
     },
   },

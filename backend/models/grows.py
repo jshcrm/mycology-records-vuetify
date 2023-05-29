@@ -1,10 +1,7 @@
 from sqlalchemy import Column, ForeignKey, Integer
-from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import relationship
 
 from backend.models.base import Base
-from backend.models.strains import Strain
-from backend.models.media import Media
 
 
 class Grow(Base):

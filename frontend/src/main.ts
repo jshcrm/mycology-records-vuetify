@@ -12,6 +12,24 @@ import VueApexCharts from "vue3-apexcharts";
 
 import "./assets/main.css";
 
+import "vuetify/styles";
+import { createVuetify } from "vuetify";
+import { aliases, mdi } from "vuetify/iconsets/mdi";
+import * as components from "vuetify/components";
+import * as directives from "vuetify/directives";
+
+const vuetify = createVuetify({
+  components,
+  directives,
+  icons: {
+    defaultSet: "mdi",
+    aliases,
+    sets: {
+      mdi,
+    },
+  },
+});
+
 const app = createApp(App);
 
 app.config.globalProperties.$filters = {
@@ -24,6 +42,7 @@ app
   .use(createPinia())
   .use(router)
   .use(vfmPlugin)
+  .use(vuetify)
   .use(VueSidebarMenu)
   .use(VueApexCharts)
   .mount("#app");

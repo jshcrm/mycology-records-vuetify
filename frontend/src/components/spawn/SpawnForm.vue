@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import Button from "@/components/base/Button.vue";
 import DateInput from "@/components/forms/DateInput.vue";
 import TextInput from "@/components/forms/TextInput.vue";
 import SpawnService from "@/networking/spawn.service.js";
@@ -44,7 +43,7 @@ import type { CreateSpawn } from "@/interfaces/Spawn";
   </div>
 
   <div>
-    <Button @click="submitForm">Submit</Button>
+    <v-btn color="secondary" @click="submitForm">Submit</v-btn>
   </div>
 </template>
 

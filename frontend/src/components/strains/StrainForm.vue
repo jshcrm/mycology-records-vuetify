@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import Button from "@/components/base/Button.vue";
 import TextInput from "@/components/forms/TextInput.vue";
 import StrainService from "@/networking/strain.service.js";
 import type { CreateStrain } from "@/interfaces/Strain";
@@ -27,7 +26,7 @@ import type { CreateStrain } from "@/interfaces/Strain";
   </div>
 
   <div>
-    <Button @click="submitForm">Submit</Button>
+    <v-btn color="secondary" @click="submitForm">Submit</v-btn>
   </div>
 </template>
 

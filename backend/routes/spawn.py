@@ -24,7 +24,7 @@ async def read_spawn(
     """
     Retrieve spawn.
     """
-    return await Spawn.filter(session)
+    return await Spawn.objects().filter(session)
 
 
 @router.post("/", response_model=SpawnDB)
@@ -36,4 +36,4 @@ async def create_spawn(
     """
     Create Spawn
     """
-    return await Spawn.create(instance).save(session)
+    return await Spawn.objects().create(instance).save(session)

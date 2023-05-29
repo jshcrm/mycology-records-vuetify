@@ -45,7 +45,7 @@ export default function createCRUDroutes<
       return axios.post(`${import.meta.env.VITE_API}/${url}/${id}/`, data);
     },
     async delete(id: string): Promise<AxiosResponse<typeof readInterface>> {
-      return axios.post(`${import.meta.env.VITE_API}/${url}/${id}/`);
+      return axios.delete(`${import.meta.env.VITE_API}/${url}/${id}/`);
     },
   };
 }

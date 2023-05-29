@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import Button from "@/components/base/Button.vue";
 import Modal from "@/components/base/Modal.vue";
 import MediaCard from "@/components/media/MediaCard.vue";
 import MediaForm from "@/components/media/MediaForm.vue";
@@ -9,7 +8,7 @@ import MediaService from "@/networking/media.service.js";
 
 <template>
   <div class="w-full text-right">
-    <Button size="xl " @click="showCreateModal = true">Create Media</Button>
+    <v-btn color="secondary" @click="showCreateModal = true">Create Media</v-btn>
   </div>
 
   <div class="flex">

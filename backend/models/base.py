@@ -36,6 +36,11 @@ class Base:
         await session.refresh(self)
         return self
 
+    async def delete(self, session: AsyncSession):
+        await session.delete(self)
+        await session.flush()
+        return True
+
 
 U = TypeVar("U", bound=BaseModel)
 

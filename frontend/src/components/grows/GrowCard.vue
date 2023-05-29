@@ -1,39 +1,41 @@
 <script setup lang="ts">
 import type { Grow } from "@/interfaces/Grow.js";
 import type { PropType } from "vue";
-import Button from "../base/Button.vue";
 import Modal from "@/components/base/Modal.vue";
 import MediaCard from "@/components/media/MediaCard.vue";
 import MediaForm from "@/components/media/MediaForm.vue";
 </script>
 
 <template>
-  <div class="flex w-full">
-    <div class="block p-6 rounded-lg shadow-lg bg-white">
-      <h5 class="inline text-gray-900 text-xl leading-tight font-medium mb-2">
+  <div class="d-flex">
+    <v-card>
+      <v-card-title>
         <RouterLink
           :to="{ name: 'grows-detail', params: { id: grow.id } }"
           class="flex items-center"
           >{{ grow.strain.name }}</RouterLink
         >
-      </h5>
+      </v-card-title>
 
-      <Button class="float-right" size="lg" @click="showMediaCreateModal = true"
-        >Add Media</Button
-      >
+      <v-card-text>
+        <p class="text-gray-700 text-base mb-4">
+          <span class="font-bold">Notes:</span> {{ grow.notes }}
+        </p>
 
-      <p class="text-gray-700 text-base mb-4">
-        <span class="font-bold">Notes:</span> {{ grow.notes }}
-      </p>
-
-      <div class="flex">
-        <div class="mr-4" v-for="media in grow.medias" :key="media.id">
-          <MediaCard :media="media"></MediaCard>
+        <div class="d-flex">
+          <div class="mr-4" v-for="media in grow.medias" :key="media.id">
+            <MediaCard :media="media"></MediaCard>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
+      </v-card-text>
 
+      <v-card-actions>
+        <v-btn color="primary" @click="showMediaCreateModal = true"
+          >Add Media</v-btn
+        >
+      </v-card-actions>
+    </v-card>
+  </div>
   <Modal v-model="showMediaCreateModal">
     <h2 name="title">Create Media</h2>
     <MediaForm :growID="grow.id" @mediaCreated="closeMediaForm"></MediaForm>

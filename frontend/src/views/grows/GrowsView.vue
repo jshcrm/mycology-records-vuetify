@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import Button from "@/components/base/Button.vue";
 import Modal from "@/components/base/Modal.vue";
 import GrowCard from "@/components/grows/GrowCard.vue";
 import GrowForm from "@/components/grows/GrowForm.vue";
@@ -9,10 +8,10 @@ import GrowService from "@/networking/grow.service.js";
 
 <template>
   <div class="w-full text-right">
-    <Button size="xl " @click="showCreateModal = true">Create Grow</Button>
+    <v-btn color="primary" @click="showCreateModal = true">Create Grow</v-btn>
   </div>
 
-  <div class="flex">
+  <div class="d-flex">
     <div class="mr-4" v-for="grow in grows" :key="grow.id">
       <GrowCard @mediaCreated="listGrows" :grow="grow"></GrowCard>
     </div>
